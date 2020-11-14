@@ -185,6 +185,8 @@ module ActiveRecord
           public_send("#{role}_class").model_name.singular.inquiry
         end
 
+        scope "with_#{role.to_s.pluralize}", -> { includes(role) }
+
         types.each do |type|
           scope_name = type.tableize.gsub("/", "_")
           singular   = scope_name.singularize

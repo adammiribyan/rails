@@ -39,6 +39,10 @@ class DelegatedTypeTest < ActiveRecord::TestCase
     assert Entry.comments.first.comment?
   end
 
+  test "including delegated class instances" do
+    assert Entry.messages.with_entryables.includes_values.include?(:entryable)
+  end
+
   test "accessor" do
     assert @entry_with_message.message.is_a?(Message)
     assert_nil @entry_with_message.comment
